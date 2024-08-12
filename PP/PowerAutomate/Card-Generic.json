@@ -1,0 +1,187 @@
+concat(
+    '{
+        "type": "AdaptiveCard",
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "version": "1.4",'
+        , if(
+            equals(
+                outputs('ShouldUseFullWidth')
+                , 'true'
+            )
+            , '"msteams": {"width": "Full"},'
+            , ''
+        )
+        , '"body": [
+            {
+                "type": "ColumnSet",
+                "columns": [
+                    {
+                        "type": "Column",
+                        "width": "auto",
+                        "horizontalAlignment": "Left",
+                        "spacing": "Small",
+                        "items": [
+                            {
+                                "type": "Container",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "', outputs('EnvEmoji'), '",
+                                        "wrap": true,
+                                        "spacing": "Small",
+                                        "horizontalAlignment": "Left",
+                                        "verticalContentAlignment": "Center",
+                                        "size": "ExtraLarge",
+                                        "weight": "Bolder"
+                                    }
+                                ],
+                                "spacing": "Small",
+                                "horizontalAlignment": "Left",
+                                "verticalContentAlignment": "Center",
+                                "style": "default"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Column",
+                        "width": "stretch",
+                        "items": [
+                            {
+                                "type": "Container",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "', outputs('Env'),'",
+                                        "wrap": true,
+                                        "spacing": "Small",
+                                        "horizontalAlignment": "Left",
+                                        "size": "ExtraLarge",
+                                        "weight": "Bolder",
+                                        "color": "', outputs('Theme'),'"
+                                    }
+                                ],
+                                "spacing": "Small",
+                                "horizontalAlignment": "Left",
+                                "verticalContentAlignment": "Center",
+                                "style": "default"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Column",
+                        "width": "auto",
+                        "items": [
+                            {
+                                "type": "Container",
+                                "items": [
+                                    {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                            {
+                                                "type": "Action.OpenUrl",
+                                                "title": "Open LCS",
+                                                "tooltip": "Open LCS page",
+                                                "url": "', outputs('LCSurl'), '"
+                                            }
+                                        ],
+                                        "spacing": "Small",
+                                        "horizontalAlignment": "Left"
+                                    }
+                                ],
+                                "spacing": "Small",
+                                "horizontalAlignment": "Right",
+                                "verticalContentAlignment": "Center",
+                                "style": "default"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "TextBlock",
+                        "text": "', concat('Current status: ', outputs('Status')), '",
+                        "wrap": true,
+                        "size": "Large",
+                        "weight": "Bolder",
+                        "color": "', outputs('Theme'),'"
+                    }
+                ],
+                "verticalContentAlignment": "Center",
+                "horizontalAlignment": "Left",
+                "spacing": "Small",
+                "style": "', outputs('Theme'), '",
+                "bleed": true
+            },
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "FactSet",
+                        "facts": [
+                            {
+                                "title": "Time",
+                                "value": "', outputs('DateTime'),'"
+                            },
+                            {
+                                "title": "Organisation",
+                                "value": "', outputs('Org'),'"
+                            },
+                            {
+                                "title": "Project Name",
+                                "value": "', outputs('ProjectName'),'"
+                            },
+                            {
+                                "title": "Project Id",
+                                "value": "', outputs('ProjectId'),'"
+                            }
+                        ]
+                    }
+                ],
+                "spacing": "Small",
+                "horizontalAlignment": "Left",
+                "verticalContentAlignment": "Center",
+                "style": "emphasis",
+                "bleed": true
+            },
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "TextBlock",
+                        "text": "', 
+                            if(
+                                equals(
+                                    outputs('Status')
+                                    , 'Complete'
+                                )
+                                , outputs('StaticTextComplete')
+                                , if(
+                                    equals(
+                                        outputs('Status')
+                                        , 'In progress'
+                                    )
+                                    , outputs('StaticTextInProgress')
+                                    , ''
+                                )
+                            ) , '",
+                        "wrap": true,
+                        "spacing": "Small",
+                        "horizontalAlignment": "Left",
+                        "size": "Small",
+                        "weight": "Lighter",
+                        "isSubtle": true,
+                        "color": "Default"
+                    }
+                ],
+                "spacing": "Small",
+                "horizontalAlignment": "Left",
+                "verticalContentAlignment": "Center",
+                "bleed": true,
+                "style": "default"
+            }
+        ]
+    }'
+)
