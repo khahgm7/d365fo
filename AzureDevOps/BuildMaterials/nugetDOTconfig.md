@@ -1,0 +1,10 @@
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <clear />
+    <add key="BTZ_Feed_10.0.40" value="https://pkgs.dev.azure.com/bitzer-d365/Bitzer/_packaging/BTZ_Feed_10.0.40/nuget/v3/index.json" />
+  </packageSources>
+</configuration>
+```
