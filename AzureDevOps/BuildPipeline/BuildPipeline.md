@@ -20,7 +20,11 @@ install -Noninteractive $(NugetConfigsPath)\packages.config -ConfigFile $(NugetC
 ![4_BuildSolution](/4_BuildSolution.png)
 
 ```ps
-/p:BuildTasksDirectory="$(NugetsPath)\$(PlatCompiler)\DevAlm" /p:MetadataDirectory="$(MetadataPath)" /p:FrameworkDirectory="$(NugetsPath)\$(PlatCompiler)" /p:ReferenceFolder="$(NugetsPath)\$(PlatBuildXpp)\$(RefNet40);$(NugetsPath)\$(AppBuildXpp)\$(RefNet40);$(NugetsPath)\$(AppSuiteBuildXpp)\$(RefNet40);$(MetadataPath);$(Build.BinariesDirectory)" /p:ReferencePath="$(NugetsPath)\$(PlatCompiler)" /p:OutputDirectory="$(Build.BinariesDirectory)"
+/p:BuildTasksDirectory="$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Platform.CompilerPackage\DevAlm"
+/p:MetadataDirectory="$(Build.SourcesDirectory)\Metadata"
+/p:FrameworkDirectory="$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Platform.CompilerPackage"
+/p:ReferenceFolder="$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Platform.DevALM.BuildXpp\ref\net40;$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Application1.DevALM.BuildXpp\ref\net40;$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Application2.DevALM.BuildXpp\ref\net40;$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.ApplicationSuite.DevALM.BuildXpp\ref\net40;$(Build.SourcesDirectory)\Metadata;$(Build.BinariesDirectory)"
+/p:ReferencePath="$(Pipeline.Workspace)\NuGets\Microsoft.Dynamics.AX.Platform.CompilerPackage" /p:OutputDirectory="$(Build.BinariesDirectory)"
 ```
 
 # Use Nuget
