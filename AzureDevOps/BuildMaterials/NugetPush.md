@@ -13,7 +13,7 @@
 
 $NugetPath = "G:\Nuget\"
 $PackagePath = "G:\Nuget\40-Current\*.nupkg"
-$Feed = "BTZ_Feed_10.0.40"
+$Feed = "https://pkgs.dev.azure.com/bitzer-d365/Bitzer/_packaging/BTZ_Feed_10.0.41/nuget/v3/index.json"
 $ApiString = "az"
 $TimeOut = 1200
 
